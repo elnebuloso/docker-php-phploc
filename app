@@ -2,15 +2,15 @@
 
 case "$1" in
     create)
-        docker build -t docker-php-phpcpd --rm --pull -f Dockerfile .
+        docker build -t docker-php-phploc --rm --pull -f Dockerfile .
     ;;
 
     verify)
-        docker run -it --rm docker-php-phpcpd --version
+        docker run -it --rm docker-php-phploc --version
     ;;
 
     help)
-        docker run -it --rm docker-php-phpcpd --help
+        docker run -it --rm docker-php-phploc --help
     ;;
 
     test)
@@ -18,8 +18,9 @@ case "$1" in
         mkdir -p test/report
         git clone https://github.com/symfony/asset.git test/symfony-asset > /dev/null 2>&1
 
-        docker run --rm -w $(pwd) -v $(pwd):$(pwd) docker-php-phpcpd \
-            --log-pmd=$(pwd)/test/report/report.xml \
+        docker run --rm -w $(pwd) -v $(pwd):$(pwd) docker-php-phploc \
+            --log-csv=$(pwd)/test/report/report.csv \
+            --log-xml=$(pwd)/test/report/report.xml \
             $(pwd)/test/symfony-asset/
     ;;
 

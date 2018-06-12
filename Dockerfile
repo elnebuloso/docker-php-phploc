@@ -5,8 +5,8 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /srv
 
 RUN echo "install packages" \
-    && composer global require sebastian/phpcpd:^4.0 --no-suggest --no-ansi --no-interaction \
-    && ln -s /srv/vendor/bin/phpcpd /usr/local/bin/phpcpd
+    && composer global require phploc/phploc:^4.0 --no-suggest --no-ansi --no-interaction \
+    && ln -s /srv/vendor/bin/phploc /usr/local/bin/phploc
 
-ENTRYPOINT ["phpcpd"]
+ENTRYPOINT ["phploc"]
 CMD ["-"]

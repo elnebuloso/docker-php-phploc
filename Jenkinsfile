@@ -5,13 +5,13 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    image = docker.build("elnebuloso/php-phpcpd", "--pull --rm --no-cache -f Dockerfile .")
+                    image = docker.build("elnebuloso/php-phploc", "--pull --rm --no-cache -f Dockerfile .")
 
                     image.inside("--entrypoint=''") {
-                        phpcpd_version = sh(script: "phpcpd --version | grep -Eo '((\\d+\\.)+\\d+)'", returnStdout: true).trim()
+                        phploc_version = sh(script: "phploc --version | grep -Eo '((\\d+\\.)+\\d+)'", returnStdout: true).trim()
                     }
 
-                    semver = semver(phpcpd_version)
+                    semver = semver(phploc_version)
 
                     docker.withRegistry("https://registry.hub.docker.com", '061d45cc-bc11-4490-ac21-3b2276f1dd05'){
                         image.push("${semver.get('tag_revision')}")
