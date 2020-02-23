@@ -27,14 +27,13 @@ jobs:
           echo "::set-env name=MAJOR::$MAJOR"
           echo "::set-env name=MINOR::$MINOR"
           echo "::set-env name=PATCH::$PATCH"
-          echo "$MAJOR $MINOR $PATCH"
-#      - name: Release
-#        run: |
-#          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-#          docker tag ${TAG} ${TAG}:${MAJOR}.${MINOR}.${PATCH}
-#          docker tag ${TAG} ${TAG}:${MAJOR}.${MINOR}
-#          docker tag ${TAG} ${TAG}:${MAJOR}
-#          docker push ${TAG}:${MAJOR}.${MINOR}.${PATCH}
-#          docker push ${TAG}:${MAJOR}.${MINOR}
-#          docker push ${TAG}:${MAJOR}
-#          docker push ${TAG}
+      - name: Release
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker tag ${TAG} ${TAG}:${MAJOR}.${MINOR}.${PATCH}
+          docker tag ${TAG} ${TAG}:${MAJOR}.${MINOR}
+          docker tag ${TAG} ${TAG}:${MAJOR}
+          docker push ${TAG}:${MAJOR}.${MINOR}.${PATCH}
+          docker push ${TAG}:${MAJOR}.${MINOR}
+          docker push ${TAG}:${MAJOR}
+          docker push ${TAG}
