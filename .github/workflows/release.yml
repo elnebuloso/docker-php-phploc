@@ -21,9 +21,9 @@ jobs:
           docker build --tag ${TAG} --pull --rm --no-cache --file Dockerfile .
           docker run ${TAG} phploc --version > ${version}
           cat ${version}
-          export MAJOR=$(cat ${version} | grep -Po '^(\d+\.)+\d+' | cut -d. -f1)
-          export MINOR=$(cat ${version} | grep -Po '^(\d+\.)+\d+' | cut -d. -f2)
-          export PATCH=$(cat ${version} | grep -Po '^(\d+\.)+\d+' | cut -d. -f3)
+          export MAJOR=$(cat ${version} | grep -Po '(\d+\.)+\d+' | cut -d. -f1)
+          export MINOR=$(cat ${version} | grep -Po '(\d+\.)+\d+' | cut -d. -f2)
+          export PATCH=$(cat ${version} | grep -Po '(\d+\.)+\d+' | cut -d. -f3)
           echo "::set-env name=MAJOR::$MAJOR"
           echo "::set-env name=MINOR::$MINOR"
           echo "::set-env name=PATCH::$PATCH"
